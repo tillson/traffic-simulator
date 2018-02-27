@@ -10,6 +10,10 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 import os
 
+import SimpleHTTPServer
+import SocketServer
+
+
 # Configuration
 ENABLE_FTP = True
 ENABLE_HTTP = True
@@ -31,11 +35,14 @@ if ENABLE_FTP:
     server = FTPServer(("127.0.0.1", 21), handler)
     server.serve_forever()
 
-#
-# # HTTP Server Code
-# if ENABLE_HTTP:
-#
-#
+
+# HTTP Server Code
+if ENABLE_HTTP:
+    Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+    httpd = SocketServer.TCPServer(("", 80), Handler)
+    httpd.serve_forever()
+
+
 # # Telnet Server Code
 # if ENABLE_TELNET:
 

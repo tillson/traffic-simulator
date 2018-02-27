@@ -1,0 +1,22 @@
+[
+  {
+    "flag": "flag{encrypt_y0ur_ftp_y0}",
+    "points": 100
+  },
+  {
+    "flag": "flag{coming_up_with_flag_text_ideas_is_hard}",
+    "points": 75
+  }
+  {
+    "flag": "thisisabadpassword",
+    "points": 50
+  },
+  {
+    "flag": "abc123!!!",
+    "points": 50
+  },
+  {
+    "flag": "root",
+    "points": 25
+  }
+]

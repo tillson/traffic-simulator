@@ -13,6 +13,11 @@ import os
 import SimpleHTTPServer
 import SocketServer
 
+import socket
+import sys
+from thread import *
+
+
 
 # Configuration
 ENABLE_FTP = True
@@ -32,20 +37,42 @@ if ENABLE_FTP:
     handler = FTPHandler
     handler.authorizer = authorizer
 
-    server = FTPServer(("127.0.0.1", 21), handler)
+    server = FTPServer(('', 21), handler)
     server.serve_forever()
 
 
 # HTTP Server Code
 if ENABLE_HTTP:
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-    httpd = SocketServer.TCPServer(("", 80), Handler)
+    httpd = SocketServer.TCPServer(('', 80), Handler)
     httpd.serve_forever()
 
 
-# # Telnet Server Code
-# if ENABLE_TELNET:
+# Telnet Server Code
+if ENABLE_TELNET:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        s.bind(('', 5555))
+    except socket.error as msg:
+        print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+        sys.exit()
+    s.listen(10)
+    while 1:
+        #wait to accept a connection - blocking call
+        conn, addr = s.accept()
+        print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
+        #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
+        start_new_thread(clientthread ,(conn,))
 
+    s.close()
 
-# Data
+def clientthread(conn):
+    conn.send('Welcome to the server. Type something and hit enter\n')
+    while True:
+        data = conn.recv(1024)
+        reply = 'OK...' + data
+        if not data:
+            break
+        conn.sendall(reply)
+    conn.close()

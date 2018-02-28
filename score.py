@@ -36,13 +36,13 @@ def submit():
             else:
                 team = team[0]
                 if flag["flag"] in team["flags"]:
-                    return redirect("/?success&submitted=1", code=302)
+                    return redirect("/?submitted=1", code=302)
                 team["flags"].append(flag["flag"])
                 team["score"] = (team["score"] + flag["points"])
             writeDataToFile()
-            return redirect("/?success&points=" + str(flag["points"]), code=302)
+            return redirect("/?points=" + str(flag["points"]), code=302)
     print request.form["teamname"]
-    return redirect("/?success&error=1", code=302)
+    return redirect("/?error=1", code=302)
 
 def writeDataToFile():
     with open('data/data.json', 'w') as outfile:

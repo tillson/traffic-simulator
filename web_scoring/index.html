@@ -9,15 +9,28 @@
     <hr style="width:40%; margin-left:0;">
     <div class="row">
       <div class="col-md-6">
-        <form>
+        {% if error %}
+          <div class="alert alert-danger" role="alert">
+            <strong>Nope!</strong> That was not a flag.
+          </div>
+        {% elif points %}
+          <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You have receieved {{ points }} points!
+          </div>
+        {% elif submitted %}
+          <div class="alert alert-warning" role="alert">
+            <strong>Hmm...</strong> You've already submitted this flag.
+          </div>
+        {% endif %}
+        <form action="/submit" method="post">
           <div class="form-group">
-            <label for="exampleInputEmail1">Team Name</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="PG Cyclones">
-            <small id="emailHelp" class="form-text text-muted">Use the same team name for every submission (case sensitive).</small>
+            <label>Team Name</label>
+            <input type="name" name="teamname" class="form-control" placeholder="PG Cyclones">
+            <small class="form-text text-muted">Use the same team name for every submission (case sensitive).</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Flag</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="flag{this_is_a_bad_flag}">
+            <label>Flag</label>
+            <input type="name" name="flag" class="form-control" placeholder="flag{this_is_a_bad_flag}">
           </div>
           <button type="submit" class="btn btn-primary">Check</button>
         </form>

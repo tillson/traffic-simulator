@@ -6,7 +6,7 @@
   {
     "flag": "flag{coming_up_with_flag_text_ideas_is_hard}",
     "points": 75
-  }
+  },
   {
     "flag": "thisisabadpassword",
     "points": 50
@@ -18,5 +18,9 @@
   {
     "flag": "root",
     "points": 25
+  },
+  {
+    "flag": "flag{this_is_a_bad_flag}",
+    "points": 1
   }
 ]

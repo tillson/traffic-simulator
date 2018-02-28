@@ -17,21 +17,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Team 1</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Team 2</td>
-            <td>65</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Team 3</td>
-            <td>10</td>
-          </tr>
+          {% for team in teamData %}
+            <tr>
+              <th scope="row">{{ loop.index }}</th>
+              <td>{{ team["teamname"] }}</td>
+              <td>{{ team["score"] }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
